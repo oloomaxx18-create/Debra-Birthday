@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Debra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#170f27;
+    --ink2:#241a38;
+    --gold:#dcac5e;
+    --gold-soft:#f0d6a3;
+    --blush:#e7b3bd;
+    --parchment:#f7f0e3;
+    --parchment2:#efe4cf;
+    --rose:#8f2f4c;
+    --rose-deep:#6c2038;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--ink);}
+  body{
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:radial-gradient(ellipse at 50% 20%, var(--ink2) 0%, var(--ink) 65%);
+    padding:6vh 6vw;
+    transition:opacity 1.1s ease, transform 1.1s ease, filter 1.1s ease;
+    overflow:hidden;
+  }
+  .hero.leaving{
+    opacity:0;
+    transform:translateY(-4vh) scale(0.98);
+    filter:blur(6px);
+    pointer-events:none;
+  }
+  .stars{position:absolute; inset:0; z-index:0;}
+  .stars span{
+    position:absolute;
+    width:2px; height:2px;
+    background:var(--gold-soft);
+    border-radius:50%;
+    opacity:0.55;
+    animation:twinkle 4.5s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:.15;}
+    50%{opacity:.85;}
+  }
+
+  .eyebrow{
+    position:relative; z-index:1;
+    font-family:'Inter',sans-serif;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    font-size:.68rem;
+    color:var(--blush);
+    opacity:.85;
+    margin-bottom:1.6rem;
+  }
+  .headline{
+    position:relative; z-index:1;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(2.3rem, 7vw, 4.4rem);
+    color:var(--parchment);
+    line-height:1.08;
+    margin:0 0 .4rem 0;
+  }
+  .headline em{
+    font-style:normal;
+    font-weight:600;
+    color:var(--gold-soft);
+  }
+  .sub{
+    position:relative; z-index:1;
+    font-family:'Newsreader', serif;
+    font-size:clamp(1rem, 2vw, 1.2rem);
+    color:#cbbfde;
+    max-width:34ch;
+    margin:0 0 3.4rem 0;
+    line-height:1.55;
+  }
+
+  /* candle */
+  .candle-wrap{
+    position:relative; z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:0;
+    font-family:inherit;
+  }
+  .flame{
+    width:14px;
+    height:26px;
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    background:radial-gradient(ellipse at 50% 70%, #fff3c4 0%, var(--gold) 45%, #c9762b 100%);
+    box-shadow:0 0 18px 6px rgba(220,172,94,.55), 0 0 36px 14px rgba(220,172,94,.22);
+    margin-bottom:-2px;
+    animation:flicker 2.4s ease-in-out infinite;
+    transform-origin:50% 100%;
+  }
+  @keyframes flicker{
+    0%,100%{ transform:scaleY(1) rotate(-1deg); }
+    30%{ transform:scaleY(1.08) rotate(1.5deg); }
+    55%{ transform:scaleY(0.94) rotate(-2deg); }
+    80%{ transform:scaleY(1.04) rotate(1deg); }
+  }
+  .candle-wrap.blown .flame{
+    animation:blowout .55s ease forwards;
+  }
+  @keyframes blowout{
+    0%{ transform:scaleY(1) rotate(0); opacity:1; }
+    40%{ transform:scaleY(1.6) rotate(35deg) translateX(6px); opacity:.7; }
+    100%{ transform:scaleY(0) rotate(60deg) translateX(14px); opacity:0; }
+  }
+  .smoke{
+    width:3px; height:3px; border-radius:50%;
+    background:#c9c1d6;
+    opacity:0;
+    margin-bottom:-2px;
+  }
+  .candle-wrap.blown .smoke{
+    animation:smokeUp 1.6s ease-out .4s forwards;
+  }
+  @keyframes smokeUp{
+    0%{ opacity:.55; transform:translate(0,0) scale(1); }
+    100%{ opacity:0; transform:translate(8px,-46px) scale(9); }
+  }
+  .stick{
+    width:16px;
+    height:70px;
+    border-radius:3px;
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold) 40%, var(--rose) 40.2%, var(--rose-deep));
+    box-shadow:0 4px 14px rgba(0,0,0,.4);
+  }
+  .base{
+    width:64px; height:14px;
+    border-radius:50%;
+    background:radial-gradient(ellipse, #3a2b52, transparent 70%);
+    margin-top:-4px;
+  }
+  .cta-label{
+    position:relative; z-index:1;
+    margin-top:1.6rem;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    letter-spacing:.08em;
+    color:var(--gold-soft);
+    opacity:.9;
+  }
+  .cta-label small{
+    display:block;
+    margin-top:.3rem;
+    font-size:.72rem;
+    color:#a99bc2;
+    letter-spacing:.02em;
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter-screen{
+    position:relative;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(143,47,76,.10), transparent 55%),
+      var(--parchment);
+    display:flex;
+    justify-content:center;
+    padding:9vh 6vw 12vh;
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 1.2s ease .2s, transform 1.2s ease .2s;
+  }
+  .letter-screen.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .letter{
+    max-width:620px;
+    width:100%;
+  }
+  .seal{
+    width:46px; height:46px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--rose), var(--rose-deep) 75%);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold-soft);
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.1rem;
+    box-shadow:0 6px 16px rgba(108,32,56,.35);
+    margin-bottom:2.2rem;
+  }
+  .letter h1{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.7rem, 4vw, 2.3rem);
+    color:var(--rose-deep);
+    margin:0 0 2rem 0;
+  }
+  .letter p{
+    font-family:'Newsreader', serif;
+    font-size:1.09rem;
+    line-height:1.85;
+    color:#33283f;
+    margin:0 0 1.5rem 0;
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .letter-screen.visible p{ opacity:1; transform:translateY(0); }
+  .letter p:nth-of-type(1){transition-delay:.5s;}
+  .letter p:nth-of-type(2){transition-delay:.75s;}
+  .letter p:nth-of-type(3){transition-delay:1s;}
+  .letter p:nth-of-type(4){transition-delay:1.25s;}
+  .letter p:nth-of-type(5){transition-delay:1.5s;}
+  .letter p:nth-of-type(6){transition-delay:1.75s;}
+  .letter p:nth-of-type(7){transition-delay:2s;}
+
+  .sign{
+    margin-top:2.6rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.2rem;
+    color:var(--rose);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity .9s ease 2.25s, transform .9s ease 2.25s;
+  }
+  .letter-screen.visible .sign{ opacity:1; transform:translateY(0); }
+  .heart{
+    width:11px;height:11px;
+    background:var(--rose);
+    display:inline-block;
+    transform:rotate(45deg);
+    position:relative;
+    margin:0 2px;
+  }
+  .heart::before,.heart::after{
+    content:'';
+    position:absolute;
+    width:11px;height:11px;
+    background:var(--rose);
+    border-radius:50%;
+  }
+  .heart::before{ left:-5.5px; top:0; }
+  .heart::after{ top:-5.5px; left:0; }
+
+  footer.note{
+    text-align:center;
+    font-family:'Inter',sans-serif;
+    font-size:.72rem;
+    color:#a99bc2;
+    letter-spacing:.03em;
+    padding-bottom:3vh;
+    background:var(--parchment);
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero" id="hero">
+    <div class="stars" id="stars"></div>
+    <p class="eyebrow">a letter, for you</p>
+    <h1 class="headline">Happy Birthday,<br><em>Debra</em></h1>
+    <p class="sub">Make a wish. Then blow out the candle to open what I wrote for you.</p>
+
+    <button class="candle-wrap" id="candleBtn" aria-label="Blow out the candle to open your letter">
+      <span class="smoke"></span>
+      <span class="flame"></span>
+      <span class="stick"></span>
+      <span class="base"></span>
+    </button>
+    <p class="cta-label">tap the flame<small>your letter is waiting on the other side</small></p>
+  </section>
+
+  <section class="letter-screen" id="letterScreen">
+    <div class="letter">
+      <div class="seal">M</div>
+      <h1>My Debra,</h1>
+
+      <p>There's a particular kind of quiet that happens right before midnight, when the day hasn't quite let go and tomorrow hasn't quite arrived — and that's the hour I keep finding myself thinking of you. Not because it's your birthday. Just because it's a Tuesday, or a Thursday, or any ordinary hour that doesn't know it's about to become one I remember.</p>
+
+      <p>People talk about love like it's a lightning strike — sudden, dramatic, over as fast as it came. Nobody warns you it can also be slow and unglamorous and completely undeniable at the same time: the way you save the last piece of something without thinking, the way your voice changes when you're about to laugh, the way a room rearranges itself around wherever you happen to be standing in it. I didn't fall for you all at once. I fell for you in installments, and I'm still paying attention.</p>
+
+      <p>I want you to know that I see you — not the version of you that's easiest to love, but the actual one. The one who's tired sometimes and still shows up anyway. The one who worries more than she lets on. The one who somehow still has room to ask about my day before she's finished carrying her own. That's the person I'm writing to tonight, not an idea of you. You.</p>
+
+      <p>I don't have a poetic explanation for why it's you. I've tried to find one and it always comes back to something simple: you make ordinary time feel worth keeping. A drive home. A bad joke. Waiting in line for something neither of us actually wanted. I remember those the way other people remember big occasions, because you were in them.</p>
+
+      <p>So on your birthday, here's what I actually want for you — not gifts, though I hope you like those too. I want you to walk through this next year knowing exactly how looked-at you are. Not watched. Looked at, closely, on purpose, by someone who isn't going anywhere. I want the parts of you that feel unfinished to relax a little, because I'm not waiting for a finished version of you to love. I already love this one.</p>
+
+      <p>Happy birthday. I hope it's loud where you want it loud, and quiet where you need it quiet, and that somewhere in the middle of it, you feel exactly how much you're loved — by me, and by everyone lucky enough to know you.</p>
+
+      <div class="sign">Yours, <span class="heart"></span> Maxy</div>
+    </div>
+  </section>
+
+  <footer class="note">made with love, for Debra's 21st</footer>
+
+<script>
+  // scatter stars
+  const starsWrap = document.getElementById('stars');
+  const starCount = 60;
+  for(let i=0;i<starCount;i++){
+    const s = document.createElement('span');
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*70+'%';
+    s.style.animationDelay = (Math.random()*4.5)+'s';
+    starsWrap.appendChild(s);
+  }
+
+  const btn = document.getElementById('candleBtn');
+  const hero = document.getElementById('hero');
+  const letterScreen = document.getElementById('letterScreen');
+  let opened = false;
+
+  btn.addEventListener('click', () => {
+    if(opened) return;
+    opened = true;
+    btn.classList.add('blown');
+    setTimeout(() => {
+      hero.classList.add('leaving');
+    }, 500);
+    setTimeout(() => {
+      letterScreen.classList.add('visible');
+      letterScreen.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 900);
+  });
+</script>
+
+</body>
+</html>
